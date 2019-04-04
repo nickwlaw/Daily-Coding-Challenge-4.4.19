@@ -10,14 +10,21 @@ public class DCPApp {
 		System.out.println(results);
 	}
 	
+	// returning inaccurate results due to comparing pairs multiple times
 	private static int test(int[][] numPairs) {
 		int results = 0;
 		for (int[] pair : numPairs) {
 			for (int i = 0; i < numPairs.length; i++) {
-				if (pair[1] <= numPairs[i][0]) 
+				if (pair[1] <= numPairs[i][0] && !numPairs[i].equals(pair)) 
 					results--;
 				if (pair[1] > numPairs[i][0] && !numPairs[i].equals(pair))
 					results++;
+			}
+			for (int i = 0; i < numPairs.length; i++) {
+				if (pair[0] <= numPairs[i][1] && !numPairs[i].equals(pair))
+					results++;
+				if (pair[0] > numPairs[i][1] && !numPairs[i].equals(pair))
+					results--;
 			}
 		}
 		return results;
